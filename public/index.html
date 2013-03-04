@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <style type="text/css">
+      html { height: 100% }
+      body { height: 100%; margin: 0; padding: 0 }
+      #map_canvas { height: 100% }
+    .ui-button {width:100%;}
+    </style>
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+  <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+  <script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+  
+  <script type="text/javascript">
+  function initialize() {
+    if (navigator.geolocation)
+    {
+      navigator.geolocation.getCurrentPosition(get_venues);
+    }
+    else{
+      alert("Geolocation is not supported by this browser.");
+    }
+  }
+    function get_venues(position) {
+    $.getJSON('https://api.foursquare.com/v2/venues/search',
+    {
+      "v": 20130107,
+      "ll": position.coords.latitude + "," + position.coords.longitude,
+      "oauth_token": "032034NPQD0CE2UPUI5ZLFK5Z1GCUS21LNPFBGQVINGO1I40"
+    }
+    ,
+    function(data) {
+    $.each(data.response.venues, function(i,item){
+      $("<div />").attr("data-role","collapsible").append($("<h3 />").text(item.name)).append($("<p />").text(item.name)).appendTo("#result");
+    });
+    });
+    $( "#result" ).collapsibleset( "refresh" );
+  }
+  
+  </script>
+  </head>
+  <body onload="initialize()">
+    <div id="result" data-role="collapsible-set"></div>
+  </body>
+</html>

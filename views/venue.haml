@@ -1,0 +1,7 @@
+%div.ui-grid-a.ui-corner-all.ui-shadow{"data-role" => "header"}
+  %div.ui-block-a.ui-bar-g{:style =>"width: #{(100/total)*yes}%"}
+    %p{:style => "text-align: center;"}="#{((100/total)*yes).round(2)}% Yes"
+  %div.ui-block-b.ui-bar-f{:style =>"width: #{(100/total)*no}%"}
+    %p{:style => "text-align: center;"}="#{((100/total)*no).round(2)}% No"
+%blockquote
+  ="Total Votes:#{total.to_i}"

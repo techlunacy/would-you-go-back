@@ -1,0 +1,4 @@
+if ! command -v bundle ; then
+  gem install bundler
+fi
+rvm use ruby-1.9.3-p194@go-back --create

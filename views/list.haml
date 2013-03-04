@@ -1,0 +1,13 @@
+%div{"data-role" => "collapsible-set"}
+  - data.each do |venue| 
+    %div{"data-role" => "collapsible", :id =>'div-'+venue.id.to_s}
+      %h1
+        = venue.name + "  (" + venue.location.distance.to_s + " m)"
+      %p{:id =>'p-'+venue.id.to_s}
+        %form{:action => "/submit/"+ venue.id.to_s, :method => "post", :id =>'form-'+venue.id.to_s, "data-ajax" => "false"}
+          %div{:id =>"venue-"+ venue.id.to_s}
+          %div.ui-grid-a
+            %div.ui-block-a
+              %input{:type => "submit", "data-theme" => "g", :value => "Yes", :formaction =>"/yes/"+ venue.id.to_s , :id =>"yes-"+ venue.id.to_s}
+            %div.ui-block-b          
+              %input{:type => "submit", "data-theme" => "f", :value => "No" , :formaction =>"/no/"+ venue.id.to_s, :id =>"no-"+ venue.id.to_s }
